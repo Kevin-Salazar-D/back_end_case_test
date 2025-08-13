@@ -10,8 +10,8 @@ const generatedTest = async (req, res) => {
       nameFolder
     } = req.body;
 
-    if (!req.files || !req.files.excel || !req.files.word || !realises || !nameTester || !result) {
-      return res.status(400).json({ error: "Faltan datos requeridos o archivos." });
+    if (!req.files || !req.files.excel || !req.files.word || !realises || !nameTester) {
+      return res.status(400).json({ error: "Faltan datos requeridos o dsfdf." });
     }
 
     const excelFile = req.files.excel[0]; // es un array
