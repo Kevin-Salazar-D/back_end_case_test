@@ -1,7 +1,13 @@
 const PizZip = require("pizzip");
 const Docxtemplater = require("docxtemplater");
 
-const generatedOnlyDoc = async (cases, wordBuffer, release, result, name_tester) => {
+const generatedOnlyDoc = async (
+  cases,
+  wordBuffer,
+  release,
+  result,
+  name_tester
+) => {
   const generatedBuffers = [];
 
   for (const caseTest of cases) {
@@ -12,9 +18,13 @@ const generatedOnlyDoc = async (cases, wordBuffer, release, result, name_tester)
         linebreaks: true,
       });
 
-      const pasos = caseTest.steps.map((step, i) => {
-        return `${i + 1}.- ${step.step}\nDescripción: ${step.description}\nResultado esperado: ${step.result}`;
-      }).join("\n\n");
+      const pasos = caseTest.steps
+        .map((step, i) => {
+          return `${i + 1}.- ${step.step} ${
+            step.description
+          }\n   - Resultado esperado: ${step.result}`;
+        })
+        .join("\n\n");
 
       doc.setData({
         RELEASE: release,
@@ -32,9 +42,12 @@ const generatedOnlyDoc = async (cases, wordBuffer, release, result, name_tester)
         name: caseTest.name.replace(/[\\/:*?"<>|]/g, "_") + ".docx",
         buffer,
       });
-
     } catch (err) {
-      console.error("Error al generar documento para caso:", caseTest.name, err);
+      console.error(
+        "Error al generar documento para caso:",
+        caseTest.name,
+        err
+      );
     }
   }
 
