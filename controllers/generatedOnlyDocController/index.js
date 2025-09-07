@@ -4,7 +4,7 @@ const generatedDocController = async (req, res) => {
   try {
     const { realises, nameTester, result } = req.body;
 
-    if (!req.files || !req.files.word || !realises || !nameTester || !result || !req.body.cases) {
+    if (!req.files.word || !realises || !nameTester || !result || !req.body.cases) {
       return res.status(400).json({ error: "Faltan datos requeridos o archivos." });
     }
 
