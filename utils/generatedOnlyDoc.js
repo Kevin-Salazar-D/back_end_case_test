@@ -1,5 +1,6 @@
 const PizZip = require("pizzip");
 const Docxtemplater = require("docxtemplater");
+const { normalizeDocument } = require("@utils/normalizeDocument.js");
 
 const generatedOnlyDoc = async (
   cases,
@@ -38,8 +39,10 @@ const generatedOnlyDoc = async (
 
       const buffer = doc.getZip().generate({ type: "nodebuffer" });
 
+      //noralizamos el docummento generado, para que no haya ningun problemma de error por carracteres no validos
       generatedBuffers.push({
-        name: caseTest.name.replace(/[\\/:*?"<>|]/g, "_") + ".docx",
+        name:  normalizeDocument(caseTest.name, "docx"),
+
         buffer,
       });
     } catch (err) {
